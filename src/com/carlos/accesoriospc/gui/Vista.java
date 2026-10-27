@@ -1,5 +1,7 @@
 package com.carlos.accesoriospc.gui;
 
+import com.carlos.accesoriospc.base.Perifericos;
+
 import javax.swing.*;
 
 public class Vista {
@@ -11,4 +13,22 @@ public class Vista {
     private JButton añadirButton;
     private JButton exportarButton;
     private JButton importarButton;
+
+    public JFrame frame;
+    public DefaultListModel<Perifericos> dlmperifericos;
+
+    public Vista(){
+        frame = new JFrame("Perifericos MVC");
+        frame.setContentPane(panel1);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        //centrar
+        frame.setLocationRelativeTo(null);
+        initComponents();
+    }
+
+    private void initComponents() {
+        dlmperifericos = new DefaultListModel<Perifericos>();
+    }
 }
