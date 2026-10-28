@@ -13,6 +13,9 @@ public class Vista {
     private JButton añadirButton;
     private JButton exportarButton;
     private JButton importarButton;
+    private JTextField precioTxt;
+    private JTextArea textArea1;
+    private JList list1;
 
     public JFrame frame;
     public DefaultListModel<Perifericos> dlmperifericos;
@@ -30,5 +33,6 @@ public class Vista {
 
     private void initComponents() {
         dlmperifericos = new DefaultListModel<Perifericos>();
+        list1.setModel(dlmperifericos);
     }
 }
