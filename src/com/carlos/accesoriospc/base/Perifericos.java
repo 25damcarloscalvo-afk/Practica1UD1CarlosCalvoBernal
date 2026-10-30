@@ -4,18 +4,18 @@ import java.time.LocalDate;
 
 public abstract class Perifericos {
     private int idPeriferico;
-    private String marca;
-    private String modelo;
+    private boolean inalambrico;
+    private String fabricante;
     private LocalDate fechaCompra;
 
     public Perifericos() {
 
     }
 
-    public Perifericos(int idPeriferico, String marca, String modelo, LocalDate fechaCompra) {
+    public Perifericos(int idPeriferico, boolean inalambrico, String fabricante, LocalDate fechaCompra) {
         this.idPeriferico = idPeriferico;
-        this.marca = marca;
-        this.modelo = modelo;
+        this.inalambrico = inalambrico;
+        this.fabricante = fabricante;
         this.fechaCompra = fechaCompra;
     }
 
@@ -27,20 +27,20 @@ public abstract class Perifericos {
         this.idPeriferico = idPeriferico;
     }
 
-    public String getMarca() {
-        return marca;
+    public boolean isInalambrico() {
+        return inalambrico;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setInalambrico(boolean inalambrico) {
+        this.inalambrico = inalambrico;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getFabricante() {
+        return fabricante;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
     }
 
     public LocalDate getFechaCompra() {

@@ -9,8 +9,8 @@ public class Teclado extends  Perifericos{
 
     }
 
-    public Teclado(int idPeriferico, String marca, String modelo, LocalDate fechaCompra, double precio) {
-        super(idPeriferico, marca, modelo, fechaCompra);
+    public Teclado(int idPeriferico, boolean inalambrico, String fabricante, LocalDate fechaCompra, double precio) {
+        super(idPeriferico, inalambrico, fabricante, fechaCompra);
         this.precio = precio;
     }
 
@@ -24,6 +24,6 @@ public class Teclado extends  Perifericos{
 
     @Override
     public String toString() {
-        return "Teclado: " + getIdPeriferico() + ", " + getMarca() + ", " + getModelo() + ", " + getPrecio();
+        return "Teclado: " + getIdPeriferico() + ", " + getFechaCompra() + ", " + isInalambrico() + ", " + getPrecio();
     }
 }
