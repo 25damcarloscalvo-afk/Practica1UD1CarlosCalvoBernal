@@ -3,27 +3,28 @@ package com.carlos.accesoriospc.base;
 import java.time.LocalDate;
 
 public class Teclado extends  Perifericos{
-    public double precio;
+    public int peso;
 
     public Teclado() {
 
     }
 
-    public Teclado(int idPeriferico, boolean inalambrico, String fabricante, LocalDate fechaCompra, double precio) {
-        super(idPeriferico, inalambrico, fabricante, fechaCompra);
-        this.precio = precio;
+    public Teclado(int idPeriferico, boolean inalambrico, String fabricante, LocalDate fechaCompra, double precio, int peso) {
+        super(idPeriferico, inalambrico, fabricante, fechaCompra, precio);
+        this.peso = peso;
     }
 
-    public double getPrecio() {
-        return precio;
+    public int getpeso() {
+        return peso;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setpeso(int peso) {
+        this.peso = peso;
     }
 
     @Override
     public String toString() {
-        return "Teclado: " + getIdPeriferico() + ", " + getFechaCompra() + ", " + isInalambrico() + ", " + getPrecio();
+        return "Teclado: " + getIdPeriferico() + ", " +
+                getFechaCompra() + ", " + isInalambrico() + ", " + getPrecio() + ", " + getpeso();
     }
 }

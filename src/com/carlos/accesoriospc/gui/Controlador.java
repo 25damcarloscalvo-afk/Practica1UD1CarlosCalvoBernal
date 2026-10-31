@@ -8,4 +8,12 @@ public class Controlador {
         this.vista = vista;
         this.modelo = modelo;
     }
+
+    private boolean hayCamposVacios() {
+
+    }
+
+    private void limpiarCampos() {
+
+    }
 }

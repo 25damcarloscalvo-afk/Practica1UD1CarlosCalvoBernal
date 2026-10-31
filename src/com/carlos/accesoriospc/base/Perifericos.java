@@ -7,16 +7,18 @@ public abstract class Perifericos {
     private boolean inalambrico;
     private String fabricante;
     private LocalDate fechaCompra;
+    private double precio;
 
     public Perifericos() {
 
     }
 
-    public Perifericos(int idPeriferico, boolean inalambrico, String fabricante, LocalDate fechaCompra) {
+    public Perifericos(int idPeriferico, boolean inalambrico, String fabricante, LocalDate fechaCompra, double precio) {
         this.idPeriferico = idPeriferico;
         this.inalambrico = inalambrico;
         this.fabricante = fabricante;
         this.fechaCompra = fechaCompra;
+        this.precio = precio;
     }
 
     public int getIdPeriferico() {
@@ -49,5 +51,13 @@ public abstract class Perifericos {
 
     public void setFechaCompra(LocalDate fechaCompra) {
         this.fechaCompra = fechaCompra;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 }

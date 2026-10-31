@@ -6,16 +6,16 @@ import javax.swing.*;
 
 public class Vista {
     private JPanel panel1;
-    private JRadioButton tecladoRadioButton;
-    private JRadioButton ratonRadioButton;
-    private JTextField fabricanteTxt;
-    private JButton añadirButton;
-    private JButton exportarButton;
-    private JButton importarButton;
-    private JTextField precioTxt;
-    private JTextArea textArea1;
-    private JList list1;
-    private JComboBox Inalambrico;
+    public JRadioButton tecladoRadioButton;
+    public JRadioButton ratonRadioButton;
+    public JTextField fabricanteTxt;
+    public JButton añadirButton;
+    public JButton exportarButton;
+    public JButton importarButton;
+    public JTextField precioTxt;
+    public JTextArea textArea1;
+    public JList list1;
+    public JComboBox inalambrico;
 
     public JFrame frame;
     public DefaultListModel<Perifericos> dlmperifericos;
@@ -34,8 +34,8 @@ public class Vista {
     private void initComponents() {
         dlmperifericos = new DefaultListModel<Perifericos>();
         list1.setModel(dlmperifericos);
-        Inalambrico.addItem("Si");
-        Inalambrico.addItem("No");
-        Inalambrico.setSelectedIndex(-1); //Con esto el JCombox aparece sin ninguna opcion marcada al principio
+        inalambrico.addItem("Si");
+        inalambrico.addItem("No");
+        inalambrico.setSelectedIndex(-1); //Con esto el JCombox aparece sin ninguna opcion marcada al principio
     }
 }
