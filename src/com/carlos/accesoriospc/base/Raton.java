@@ -9,8 +9,9 @@ public class Raton extends  Perifericos{
 
     }
 
-    public Raton(int idPeriferico, boolean inalambrico, String fabricante, int numeroExistencias, LocalDate fechaCompra, double precio) {
-        super(idPeriferico, inalambrico, fabricante, fechaCompra, precio);
+    public Raton(int idPeriferico, boolean inalambrico, String fabricante,
+                 int numeroExistencias, LocalDate fechaCompra, double precio, String opinion) {
+        super(idPeriferico, inalambrico, fabricante, fechaCompra, precio, opinion);
         this.numeroExistencias = numeroExistencias;
     }
 
@@ -26,6 +27,6 @@ public class Raton extends  Perifericos{
     public String toString() {
         return "Raton: " + getIdPeriferico() + ", " +
                 getFabricante() + ", " + isInalambrico() + ", " +
-                getFechaCompra() + ", " + getNumeroExistencias() + ", " + getPrecio();
+                getFechaCompra() + ", " + getNumeroExistencias() + ", " + getPrecio() + ", " + opinion;
     }
 }

@@ -29,13 +29,13 @@ public class Modelo {
     }
 
     public void altaRaton(int idPeriferico, boolean inalambrico, String fabricante,
-                          int numeroExistencias, LocalDate fechaCompra, double precio) {
-        Raton nuevoRaton = new Raton(idPeriferico, inalambrico, fabricante, numeroExistencias, fechaCompra, precio);
+                          int numeroExistencias, LocalDate fechaCompra, double precio, String opinion) {
+        Raton nuevoRaton = new Raton(idPeriferico, inalambrico, fabricante, numeroExistencias, fechaCompra, precio, opinion);
         listaPerifericos.add(nuevoRaton);
     }
     public void altaTeclado(int idPeriferico, boolean inalambrico,
-                            String fabricante, LocalDate fechaCompra, double precio, int peso) {
-        Teclado nueTeclado = new Teclado(idPeriferico, inalambrico, fabricante, fechaCompra, precio, peso);
+                            String fabricante, LocalDate fechaCompra, double precio, int peso, String opinion) {
+        Teclado nueTeclado = new Teclado(idPeriferico, inalambrico, fabricante, fechaCompra, precio, peso, opinion);
         listaPerifericos.add(nueTeclado);
     }
 
@@ -88,7 +88,7 @@ public class Modelo {
             texto = documento.createTextNode(periferico.getFabricante());
             nodoDatos.appendChild(texto);
 
-            nodoDatos = documento.createElement("fecha compra");
+            nodoDatos = documento.createElement("fechaCompra");
             nodoPeriferico.appendChild(nodoDatos);
 
             texto = documento.createTextNode(String.valueOf(periferico.getFechaCompra()));
@@ -100,11 +100,17 @@ public class Modelo {
             texto = documento.createTextNode(String.valueOf(periferico.getPrecio()));
             nodoDatos.appendChild(texto);
 
+            nodoDatos = documento.createElement("opinion");
+            nodoPeriferico.appendChild(nodoDatos);
+
+            texto = documento.createTextNode(periferico.getOpinion());
+            nodoDatos.appendChild(texto);
+
             if (periferico instanceof Raton) {
-                nodoDatos = documento.createElement("numero existencias");
+                nodoDatos = documento.createElement("numeroExistencias");
                 nodoPeriferico.appendChild(nodoDatos);
 
-                texto = documento.createTextNode(String.valueOf(periferico.getPrecio()));
+                texto = documento.createTextNode(String.valueOf(((Raton) periferico).getNumeroExistencias()));
                 nodoDatos.appendChild(texto);
             } else {
                 nodoDatos = documento.createElement("peso");
@@ -138,21 +144,24 @@ public class Modelo {
             if (nodoPeriferico.getTagName().equals("Raton")) {
                 nuevoRaton = new Raton();
                 nuevoRaton.setIdPeriferico(Integer.parseInt(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoRaton.setInalambrico(Boolean.parseBoolean(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoRaton.setFabricante(nodoPeriferico.getChildNodes().item(0).getTextContent());
-                nuevoRaton.setFechaCompra(LocalDate.parse(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoRaton.setPrecio(Double.parseDouble(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoRaton.setNumeroExistencias(Integer.parseInt(nodoPeriferico.getChildNodes().item(0).getTextContent()));
+                nuevoRaton.setInalambrico(Boolean.parseBoolean(nodoPeriferico.getChildNodes().item(1).getTextContent()));
+                nuevoRaton.setFabricante(nodoPeriferico.getChildNodes().item(2).getTextContent());
+                nuevoRaton.setFechaCompra(LocalDate.parse(nodoPeriferico.getChildNodes().item(3).getTextContent()));
+                nuevoRaton.setPrecio(Double.parseDouble(nodoPeriferico.getChildNodes().item(4).getTextContent()));
+                nuevoRaton.setOpinion(nodoPeriferico.getChildNodes().item(5).getTextContent());
+                nuevoRaton.setNumeroExistencias(Integer.parseInt(nodoPeriferico.getChildNodes().item(6).getTextContent()));
                 listaPerifericos.add(nuevoRaton);
             }
 
             if (nodoPeriferico.getTagName().equals("Teclado")){
+                nuevoTeclado = new Teclado();
                 nuevoTeclado.setIdPeriferico(Integer.parseInt(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoTeclado.setInalambrico(Boolean.parseBoolean(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoTeclado.setFabricante(nodoPeriferico.getChildNodes().item(0).getTextContent());
-                nuevoTeclado.setFechaCompra(LocalDate.parse(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoTeclado.setPrecio(Double.parseDouble(nodoPeriferico.getChildNodes().item(0).getTextContent()));
-                nuevoTeclado.setpeso(Integer.parseInt(nodoPeriferico.getChildNodes().item(0).getTextContent()));
+                nuevoTeclado.setInalambrico(Boolean.parseBoolean(nodoPeriferico.getChildNodes().item(1).getTextContent()));
+                nuevoTeclado.setFabricante(nodoPeriferico.getChildNodes().item(2).getTextContent());
+                nuevoTeclado.setFechaCompra(LocalDate.parse(nodoPeriferico.getChildNodes().item(3).getTextContent()));
+                nuevoTeclado.setPrecio(Double.parseDouble(nodoPeriferico.getChildNodes().item(4).getTextContent()));
+                nuevoTeclado.setOpinion(nodoPeriferico.getChildNodes().item(5).getTextContent());
+                nuevoTeclado.setpeso(Integer.parseInt(nodoPeriferico.getChildNodes().item(6).getTextContent()));
                 listaPerifericos.add(nuevoTeclado);
             }
         }

@@ -1,6 +1,7 @@
 package com.carlos.accesoriospc.gui;
 
 import com.carlos.accesoriospc.base.Perifericos;
+import com.github.lgooddatepicker.components.DatePicker;
 
 import javax.swing.*;
 
@@ -13,9 +14,13 @@ public class Vista {
     public JButton exportarButton;
     public JButton importarButton;
     public JTextField precioTxt;
-    public JTextArea textArea1;
     public JList list1;
     public JComboBox inalambrico;
+    public DatePicker fechaCompra;
+    public JTextField opinionTxt;
+    public JTextField pesoNumeroExistenciasTxt;
+    public JTextField idPerifericoTxt;
+    public JLabel pesoNumeroExistenciasLbl;
 
     public JFrame frame;
     public DefaultListModel<Perifericos> dlmperifericos;
