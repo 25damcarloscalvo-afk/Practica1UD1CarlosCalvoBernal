@@ -25,6 +25,6 @@ public class Teclado extends  Perifericos{
     @Override
     public String toString() {
         return "Teclado: " + getIdPeriferico() + ", " +
-                getFechaCompra() + ", " + isInalambrico() + ", " + getPrecio() + ", " + getpeso() + ", " + opinion;
+                getFechaCompra() + ", " + getInalambricoTexto() + ", " + getPrecio() + ", " + getpeso() + ", " + opinion;
     }
 }

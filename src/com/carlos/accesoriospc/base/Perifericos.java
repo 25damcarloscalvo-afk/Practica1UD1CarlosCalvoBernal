@@ -70,4 +70,12 @@ public abstract class Perifericos {
     public void setOpinion(String opinion) {
         this.opinion = opinion;
     }
+
+    public String getInalambricoTexto() {
+        if (inalambrico) {
+            return "Si";
+        }else {
+            return "no";
+        }
+    }
 }

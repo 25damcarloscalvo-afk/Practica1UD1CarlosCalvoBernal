@@ -1,5 +1,6 @@
 package com.carlos.accesoriospc.gui;
 
+import com.carlos.accesoriospc.base.Auriculares;
 import com.carlos.accesoriospc.base.Perifericos;
 import com.carlos.accesoriospc.base.Raton;
 import com.carlos.accesoriospc.base.Teclado;
@@ -39,6 +40,13 @@ public class Modelo {
         listaPerifericos.add(nueTeclado);
     }
 
+    public void altaAuriculares(int idPeriferico, boolean inalambrico, String fabricante,
+                                LocalDate fechaCompra, double precio, String opinion, String tipoConexion) {
+        Auriculares nuevoAriculares = new Auriculares(idPeriferico, inalambrico, fabricante, fechaCompra, precio,
+                opinion, tipoConexion);
+        listaPerifericos.add(nuevoAriculares);
+    }
+
     public boolean existeIdPeriferico(int idPeriferico) {
         for (Perifericos periferico: listaPerifericos) {
             if (periferico.getIdPeriferico() == idPeriferico){
@@ -64,8 +72,10 @@ public class Modelo {
         for (Perifericos periferico : listaPerifericos) {
             if (periferico instanceof Raton) {
                 nodoPeriferico = documento.createElement("Raton");
-            }else {
+            }else if (periferico instanceof Teclado){
                 nodoPeriferico = documento.createElement("Teclado");
+            }else {
+                nodoPeriferico = documento.createElement("Auriculares");
             }
 
             raiz.appendChild(nodoPeriferico);
@@ -112,11 +122,17 @@ public class Modelo {
 
                 texto = documento.createTextNode(String.valueOf(((Raton) periferico).getNumeroExistencias()));
                 nodoDatos.appendChild(texto);
-            } else {
+            } else if (periferico instanceof Teclado){
                 nodoDatos = documento.createElement("peso");
                 nodoPeriferico.appendChild(nodoDatos);
 
                 texto = documento.createTextNode(String.valueOf(((Teclado) periferico).getpeso()));
+                nodoDatos.appendChild(texto);
+            }else {
+                nodoDatos = documento.createElement("tipoConexion");
+                nodoPeriferico.appendChild(nodoDatos);
+
+                texto = documento.createTextNode(((Auriculares) periferico).getTipoConexion());
                 nodoDatos.appendChild(texto);
             }
         }
@@ -131,6 +147,7 @@ public class Modelo {
         listaPerifericos = new ArrayList<Perifericos>();
         Raton nuevoRaton = null;
         Teclado nuevoTeclado = null;
+        Auriculares nuevoAuricular = null;
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -163,6 +180,18 @@ public class Modelo {
                 nuevoTeclado.setOpinion(nodoPeriferico.getChildNodes().item(5).getTextContent());
                 nuevoTeclado.setpeso(Integer.parseInt(nodoPeriferico.getChildNodes().item(6).getTextContent()));
                 listaPerifericos.add(nuevoTeclado);
+            }
+
+            if (nodoPeriferico.getTagName().equals("Auriculares")){
+                nuevoAuricular = new Auriculares();
+                nuevoAuricular.setIdPeriferico(Integer.parseInt(nodoPeriferico.getChildNodes().item(0).getTextContent()));
+                nuevoAuricular.setInalambrico(Boolean.parseBoolean(nodoPeriferico.getChildNodes().item(1).getTextContent()));
+                nuevoAuricular.setFabricante(nodoPeriferico.getChildNodes().item(2).getTextContent());
+                nuevoAuricular.setFechaCompra(LocalDate.parse(nodoPeriferico.getChildNodes().item(3).getTextContent()));
+                nuevoAuricular.setPrecio(Double.parseDouble(nodoPeriferico.getChildNodes().item(4).getTextContent()));
+                nuevoAuricular.setOpinion(nodoPeriferico.getChildNodes().item(5).getTextContent());
+                nuevoAuricular.setTipoConexion(nodoPeriferico.getChildNodes().item(6).getTextContent());
+                listaPerifericos.add(nuevoAuricular);
             }
         }
     }

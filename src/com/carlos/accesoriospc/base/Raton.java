@@ -26,7 +26,7 @@ public class Raton extends  Perifericos{
     @Override
     public String toString() {
         return "Raton: " + getIdPeriferico() + ", " +
-                getFabricante() + ", " + isInalambrico() + ", " +
+                getFabricante() + ", " + getInalambricoTexto() + ", " +
                 getFechaCompra() + ", " + getNumeroExistencias() + ", " + getPrecio() + ", " + opinion;
     }
 }

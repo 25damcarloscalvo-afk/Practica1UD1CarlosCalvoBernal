@@ -1,5 +1,6 @@
 package com.carlos.accesoriospc.gui;
 
+import com.carlos.accesoriospc.base.Auriculares;
 import com.carlos.accesoriospc.base.Perifericos;
 import com.carlos.accesoriospc.base.Raton;
 import com.carlos.accesoriospc.base.Teclado;
@@ -41,7 +42,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
     private boolean hayCamposVacios() {
         if (vista.fabricanteTxt.getText().isEmpty() || vista.precioTxt.getText().isEmpty() ||
                 vista.fechaCompra.getText().isEmpty() || /*vista.opinionTxt.getText().isEmpty() ||*/
-                vista.pesoNumeroExistenciasTxt.getText().isEmpty() || vista.idPerifericoTxt.getText().isEmpty() ||
+                vista.tipoConexionPesoNumeroExistenciasTxt.getText().isEmpty() || vista.idPerifericoTxt.getText().isEmpty() ||
                 vista.inalambrico.getSelectedIndex() == -1) {
             return true;
         }
@@ -54,7 +55,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
         vista.precioTxt.setText(null);
         vista.fechaCompra.setText(null);
         vista.opinionTxt.setText(null);
-        vista.pesoNumeroExistenciasTxt.setText(null);
+        vista.tipoConexionPesoNumeroExistenciasTxt.setText(null);
         vista.inalambrico.setSelectedIndex(-1);
         vista.idPerifericoTxt.requestFocus();
     }
@@ -93,6 +94,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
         vista.importarButton.addActionListener(listener);
         vista.ratonRadioButton.addActionListener(listener);
         vista.tecladoRadioButton.addActionListener(listener);
+        vista.auricularesRadioButton.addActionListener(listener);
     }
 
     private void addWindowListener(WindowListener listener) {
@@ -111,7 +113,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
                 if (hayCamposVacios()) {
                     Util.mensajeError("Los siguientes campos no puede estar vacios: \n" +
                             "id \n fabricante \n inalambrico\n precio \n Fecha compra \n opinion" +
-                            vista.pesoNumeroExistenciasLbl.getText());
+                            vista.tipoConexionPesoNumeroExistenciasLbl.getText());
                     break;
                 }
 
@@ -124,18 +126,26 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
                     modelo.altaRaton(Integer.parseInt(vista.idPerifericoTxt.getText()),
                             vista.inalambrico.getSelectedIndex() == 0,
                             vista.fabricanteTxt.getText(),
-                            Integer.parseInt(vista.pesoNumeroExistenciasTxt.getText()),
+                            Integer.parseInt(vista.tipoConexionPesoNumeroExistenciasTxt.getText()),
                             vista.fechaCompra.getDate(),
                             Double.parseDouble(vista.precioTxt.getText()),
                             vista.opinionTxt.getText());
-                } else {
+                } else if (vista.tecladoRadioButton.isSelected()){
                     modelo.altaTeclado(Integer.parseInt(vista.idPerifericoTxt.getText()),
                             vista.inalambrico.getSelectedIndex() == 0,
                             vista.fabricanteTxt.getText(),
                             vista.fechaCompra.getDate(),
                             Double.parseDouble(vista.precioTxt.getText()),
-                            Integer.parseInt(vista.pesoNumeroExistenciasTxt.getText()),
+                            Integer.parseInt(vista.tipoConexionPesoNumeroExistenciasTxt.getText()),
                             vista.opinionTxt.getText());
+                }else {
+                    modelo.altaAuriculares(Integer.parseInt(vista.idPerifericoTxt.getText()),
+                            vista.inalambrico.getSelectedIndex() == 0,
+                            vista.fabricanteTxt.getText(),
+                            vista.fechaCompra.getDate(),
+                            Double.parseDouble(vista.precioTxt.getText()),
+                            vista.opinionTxt.getText(),
+                            vista.tipoConexionPesoNumeroExistenciasTxt.getText());
                 }
                 limpiarCampos();
                 refrescar();
@@ -173,10 +183,13 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
                 refrescar();
                 break;
             case "Raton":
-                vista.pesoNumeroExistenciasLbl.setText("Nº existencias");
+                vista.tipoConexionPesoNumeroExistenciasLbl.setText("Nº existencias");
                 break;
             case "Teclado":
-                vista.pesoNumeroExistenciasLbl.setText("Peso");
+                vista.tipoConexionPesoNumeroExistenciasLbl.setText("Peso");
+                break;
+            case "Auriculares":
+                vista.tipoConexionPesoNumeroExistenciasLbl.setText("Tipo de conexión");
                 break;
         }
     }
@@ -196,11 +209,14 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
             vista.fechaCompra.setDate(perifericoSeleccionado.getFechaCompra());
             vista.opinionTxt.setText(perifericoSeleccionado.getOpinion());
             if (perifericoSeleccionado instanceof Raton) {
-                vista.pesoNumeroExistenciasTxt.setText(String.valueOf(((Raton) perifericoSeleccionado).getNumeroExistencias()));
+                vista.tipoConexionPesoNumeroExistenciasTxt.setText(String.valueOf(((Raton) perifericoSeleccionado).getNumeroExistencias()));
                 vista.ratonRadioButton.doClick();
-            }else {
-                vista.pesoNumeroExistenciasTxt.setText(String.valueOf(((Teclado) perifericoSeleccionado).getpeso()));
+            }else if (perifericoSeleccionado instanceof  Teclado){
+                vista.tipoConexionPesoNumeroExistenciasTxt.setText(String.valueOf(((Teclado) perifericoSeleccionado).getpeso()));
                 vista.tecladoRadioButton.doClick();
+            }else {
+                vista.tipoConexionPesoNumeroExistenciasTxt.setText(((Auriculares) perifericoSeleccionado).getTipoConexion());
+                vista.auricularesRadioButton.doClick();
             }
         }
     }

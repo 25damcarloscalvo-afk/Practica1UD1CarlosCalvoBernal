@@ -18,9 +18,10 @@ public class Vista {
     public JComboBox inalambrico;
     public DatePicker fechaCompra;
     public JTextField opinionTxt;
-    public JTextField pesoNumeroExistenciasTxt;
+    public JTextField tipoConexionPesoNumeroExistenciasTxt;
     public JTextField idPerifericoTxt;
-    public JLabel pesoNumeroExistenciasLbl;
+    public JLabel tipoConexionPesoNumeroExistenciasLbl;
+    public JRadioButton auricularesRadioButton;
 
     public JFrame frame;
     public DefaultListModel<Perifericos> dlmperifericos;
