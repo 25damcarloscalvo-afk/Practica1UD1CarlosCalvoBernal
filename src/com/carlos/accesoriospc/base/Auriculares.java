@@ -25,6 +25,7 @@ public class Auriculares extends Perifericos{
     @Override
     public String toString() {
         return "Auriculares: " + getIdPeriferico() + ", " +
-                getFechaCompra() + ", " + getInalambricoTexto() + ", " + getPrecio() + ", " + getTipoConexion() + ", " + opinion;
+                getFechaCompra() + ", " + getInalambricoTexto() + ", " + getPrecio() + "€, " +
+                getTipoConexion() + ", " + opinion;
     }
 }

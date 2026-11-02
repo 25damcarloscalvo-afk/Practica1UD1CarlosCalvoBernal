@@ -92,6 +92,8 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
         vista.añadirButton.addActionListener(listener);
         vista.exportarButton.addActionListener(listener);
         vista.importarButton.addActionListener(listener);
+        vista.ordenarButton.addActionListener(listener);
+        vista.eliminarButton.addActionListener(listener);
         vista.ratonRadioButton.addActionListener(listener);
         vista.tecladoRadioButton.addActionListener(listener);
         vista.auricularesRadioButton.addActionListener(listener);
@@ -182,6 +184,27 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
                 }
                 refrescar();
                 break;
+            case "Ordenar":
+                modelo.ordenarPorPrecioDescendente();
+                refrescar();
+                break;
+            case "Eliminar":
+                Perifericos perifericoSeleccionado = (Perifericos) vista.list1.getSelectedValue();
+
+                if (perifericoSeleccionado == null) {
+                    Util.mensajeError("Selecciona un periferico de la lista para eliminarlo");
+                    break;
+                }
+
+                int respuesta = Util.mensajeConfirmacion("¿Seguro que quieres eliminar este periferico?",
+                        "Eliminar");
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    modelo.eliminarPeriferico(perifericoSeleccionado);
+                    limpiarCampos();
+                    refrescar();
+                }
+                break;
             case "Raton":
                 vista.tipoConexionPesoNumeroExistenciasLbl.setText("Nº existencias");
                 break;
@@ -196,27 +219,30 @@ public class Controlador implements ActionListener, ListSelectionListener, Windo
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting()) {
+        if (!e.getValueIsAdjusting()) {
             Perifericos perifericoSeleccionado = (Perifericos) vista.list1.getSelectedValue();
-            vista.idPerifericoTxt.setText(String.valueOf(perifericoSeleccionado.getIdPeriferico()));
-            if (perifericoSeleccionado.isInalambrico()) {
-                vista.inalambrico.setSelectedIndex(0);
-            }else {
-                vista.inalambrico.setSelectedIndex(1);
-            }
-            vista.fabricanteTxt.setText(perifericoSeleccionado.getFabricante());
-            vista.precioTxt.setText(String.valueOf(perifericoSeleccionado.getPrecio()));
-            vista.fechaCompra.setDate(perifericoSeleccionado.getFechaCompra());
-            vista.opinionTxt.setText(perifericoSeleccionado.getOpinion());
-            if (perifericoSeleccionado instanceof Raton) {
-                vista.tipoConexionPesoNumeroExistenciasTxt.setText(String.valueOf(((Raton) perifericoSeleccionado).getNumeroExistencias()));
-                vista.ratonRadioButton.doClick();
-            }else if (perifericoSeleccionado instanceof  Teclado){
-                vista.tipoConexionPesoNumeroExistenciasTxt.setText(String.valueOf(((Teclado) perifericoSeleccionado).getpeso()));
-                vista.tecladoRadioButton.doClick();
-            }else {
-                vista.tipoConexionPesoNumeroExistenciasTxt.setText(((Auriculares) perifericoSeleccionado).getTipoConexion());
-                vista.auricularesRadioButton.doClick();
+
+            if (perifericoSeleccionado != null) {
+                vista.idPerifericoTxt.setText(String.valueOf(perifericoSeleccionado.getIdPeriferico()));
+                if (perifericoSeleccionado.isInalambrico()) {
+                    vista.inalambrico.setSelectedIndex(0);
+                } else {
+                    vista.inalambrico.setSelectedIndex(1);
+                }
+                vista.fabricanteTxt.setText(perifericoSeleccionado.getFabricante());
+                vista.precioTxt.setText(String.valueOf(perifericoSeleccionado.getPrecio()));
+                vista.fechaCompra.setDate(perifericoSeleccionado.getFechaCompra());
+                vista.opinionTxt.setText(perifericoSeleccionado.getOpinion());
+                if (perifericoSeleccionado instanceof Raton) {
+                    vista.tipoConexionPesoNumeroExistenciasTxt.setText(String.valueOf(((Raton) perifericoSeleccionado).getNumeroExistencias()));
+                    vista.ratonRadioButton.doClick();
+                } else if (perifericoSeleccionado instanceof Teclado) {
+                    vista.tipoConexionPesoNumeroExistenciasTxt.setText(String.valueOf(((Teclado) perifericoSeleccionado).getpeso()));
+                    vista.tecladoRadioButton.doClick();
+                } else {
+                    vista.tipoConexionPesoNumeroExistenciasTxt.setText(((Auriculares) perifericoSeleccionado).getTipoConexion());
+                    vista.auricularesRadioButton.doClick();
+                }
             }
         }
     }

@@ -195,4 +195,22 @@ public class Modelo {
             }
         }
     }
+
+    public void ordenarPorPrecioDescendente() {
+        for (int i = 0; i < listaPerifericos.size(); i++) {
+            for (int j = 0; j < listaPerifericos.size() - 1 - i; j++) {
+                Perifericos perifericoActual = listaPerifericos.get(j);
+                Perifericos siguientePeriferico = listaPerifericos.get(j + 1);
+
+                if (perifericoActual.getPrecio() < siguientePeriferico.getPrecio()) {
+                    listaPerifericos.set(j, siguientePeriferico);
+                    listaPerifericos.set(j + 1, perifericoActual);
+                }
+            }
+        }
+    }
+
+    public void eliminarPeriferico(Perifericos periferico) {
+        listaPerifericos.remove(periferico);
+    }
 }

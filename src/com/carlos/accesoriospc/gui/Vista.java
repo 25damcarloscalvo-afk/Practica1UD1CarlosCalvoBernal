@@ -22,12 +22,15 @@ public class Vista {
     public JTextField idPerifericoTxt;
     public JLabel tipoConexionPesoNumeroExistenciasLbl;
     public JRadioButton auricularesRadioButton;
+    public JButton eliminarButton;
+    public JButton ordenarButton;
 
     public JFrame frame;
     public DefaultListModel<Perifericos> dlmperifericos;
 
     public Vista(){
         frame = new JFrame("Perifericos MVC");
+        frame.setIconImage(new ImageIcon(getClass().getResource("/com/carlos/accesoriospc/resources/icono.png")).getImage());
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
